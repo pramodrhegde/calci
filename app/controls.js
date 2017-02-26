@@ -39,8 +39,12 @@ export default class Controls extends Component {
     touchSound.setVolume(1);
     touchSound.play();
 
-    let touchType = '';
-    touchType = text;
+    if(text == '÷') {
+      text = '/';
+    }else if(text == '×') {
+      text = '*';
+    }
+
     this.props.handleTouch(text, event);
   }
 

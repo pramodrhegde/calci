@@ -39,7 +39,10 @@ export default StyleSheet.create({
   },
   displayLayout: {
     flex: 3,
-    padding: 20
+    paddingTop: 10,
+    paddingRight: 20,
+    paddingBottom: 10,
+    paddingLeft: 20
   },
   displayHistoryText: {
     fontFamily: 'Quicksand-Regular',

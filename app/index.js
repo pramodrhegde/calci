@@ -47,22 +47,15 @@ export default class CalculatorApp extends Component {
       switch(touch) {
         case '+':
         case '-':
-        case '×':
-        case '÷': let operator = '';
-                  if(touch === '×') {
-                    operator = '*';
-                  }else if(touch === '÷') {
-                    operator = '/';
-                  }else {
-                    operator = touch;
-                  }
+        case '*':
+        case '/': let operator = touch;
                   // if already operator exists
                   if(currentEquation.match(/(\+|\-|\*|\/)/)) {
 
                     if(currentEquation.search(operationRegex) === currentEquation.length - 1) {
-                      operationData.historyString = currentEquation.replace(operationData.historyString[operationData.historyString.length - 1], touch);
+                      operationData.historyString = currentEquation.replace(operationData.historyString[operationData.historyString.length - 1], operator);
                     }else {
-                      operationData.historyString += touch;
+                      operationData.historyString += operator;
                     }
 
                     //  If no second operand
@@ -86,7 +79,7 @@ export default class CalculatorApp extends Component {
 
                   }else {
                     currentEquation += operator;
-                    operationData.historyString += touch;
+                    operationData.historyString += operator;
                     this.setState({
                       equation: currentEquation,
                       operationData: operationData
@@ -207,7 +200,13 @@ export default class CalculatorApp extends Component {
     let result;
     equation = equation.replace('--', '+');
     result = eval(equation);
-    return isNaN(result) ? 0 : result;
+    if(isNaN(result)) {
+      return 0;
+    }
+    if(result % 1 !== 0) {
+      return Math.round(result*10000)/10000;
+    }
+    return result;
   }
 
   render() {
