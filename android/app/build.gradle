@@ -89,9 +89,8 @@ android {
     defaultConfig {
         applicationId "com.prazor9.calci"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 3000000
+        versionName "3.0.0"
         ndk {
             abiFilters "armeabi-v7a"
         }
@@ -108,7 +107,7 @@ android {
         abi {
             reset()
             enable enableSeparateBuildPerCPUArchitecture
-            universalApk false  // If true, also generate a universal APK
+            universalApk true  // If true, also generate a universal APK
             include "armeabi-v7a", "x86"
         }
     }
