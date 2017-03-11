@@ -1,4 +1,4 @@
-package com.calci;
+package com.prazor9.calci;
 
 import com.facebook.react.ReactActivity;
 
