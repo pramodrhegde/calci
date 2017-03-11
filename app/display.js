@@ -21,8 +21,30 @@ export default class Display extends Component {
     return index;
   }
 
+  formatNumbers(number) {
+    let temp = this.numberWithCommas(number);
+    let operationRegex = /(\+|\-|\*|\/)$/;
+    let formattedNumber = '';
+
+    for(let i=0; i < temp.length; i++) {
+      if(temp[i] === '+') {
+        formattedNumber += ' + ';
+      }else if(temp[i] === '-' && temp[i - 1] && temp[i - 1].search(operationRegex) === -1) {
+        formattedNumber += ' - ';
+      }else if(temp[i] === '*') {
+        formattedNumber += ' × ';
+      }else if(temp[i] === '/') {
+        formattedNumber += ' ÷ ';
+      }else {
+        formattedNumber += temp[i];
+      }
+    }
+
+    return formattedNumber;
+  }
+
   numberWithCommas(number) {
-    
+
     var parts = number.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
@@ -37,9 +59,9 @@ export default class Display extends Component {
         <Text style={[Styles.displayHistoryText, Styles.textAlignRight]}>
           {
             this.props.data.historyString.search(operationRegex) !== -1 && this.props.data.historyString.length !== 1 ?
-            this.numberWithCommas(this.props.data.historyString)
+            this.formatNumbers(this.props.data.historyString)
             :
-            this.numberWithCommas(this.props.data.historyString.substring(0, lastIndex + 1))
+            this.formatNumbers(this.props.data.historyString.substring(0, lastIndex + 1))
           }
         </Text>
         </View>

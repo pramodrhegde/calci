@@ -52,21 +52,23 @@ export default class CalculatorApp extends Component {
                   // if already operator exists
                   if(currentEquation.match(/(\+|\-|\*|\/)/)) {
 
-                    if(currentEquation.search(operationRegex) === currentEquation.length - 1) {
-                      operationData.historyString = currentEquation.replace(operationData.historyString[operationData.historyString.length - 1], operator);
-                    }else {
-                      operationData.historyString += operator;
-                    }
+                    // if(currentEquation.search(operationRegex) === currentEquation.length - 1) {
+                    //   operationData.historyString = currentEquation.replace(new RegExp(currentEquation[currentEquation.length - 1] + '$'), operator);
+                    // }else {
+                    //   operationData.historyString += operator;
+                    // }
 
                     //  If no second operand
                     if(currentEquation.search(operationRegex) === currentEquation.length - 1) {
-                      currentEquation = currentEquation.replace(currentEquation[currentEquation.length - 1], operator);
-                      operationData.historyString = operationData.historyString.replace(new RegExp(operationData.currentEquation + '$'), currentEquation);// fix
+
+                      currentEquation = currentEquation.replace(new RegExp('\\' + currentEquation[currentEquation.length - 1] + '$'), operator);
+                      operationData.historyString = currentEquation;
                       this.setState({
                         equation: currentEquation,
                         operationData: operationData
                       });
                     }else {
+                      operationData.historyString += operator;
                       //  evaluate
                       let result = this.evaluateEquation().toString();
                       currentEquation = result + operator;
@@ -173,6 +175,7 @@ export default class CalculatorApp extends Component {
                       //  evaluate
                       let result = this.evaluateEquation().toString();
                       operationData.currentString = result;
+                      operationData.historyString = '';
                       this.setState({
                         equation: result + operator,
                         operationData: operationData
@@ -181,15 +184,12 @@ export default class CalculatorApp extends Component {
                   }else if(operator){
                     let result = this.evaluateEquation().toString();
                     operationData.currentString = result;
+                    operationData.historyString = '';
                     this.setState({
                       equation: result + operator,
                       operationData: operationData
                     });
                   }
-                  operationData.historyString = '';
-                  this.setState({
-                    operationData: operationData
-                  });
         default: break;
       }
     }
