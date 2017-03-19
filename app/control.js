@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableNativeFeedback } from 'react-native';
+import { View, Text, TouchableNativeFeedback, Platform } from 'react-native';
 import Styles from './style.js';
 
 export default class Control extends Component {
@@ -19,7 +19,8 @@ export default class Control extends Component {
 
     return(
       <TouchableNativeFeedback onPress={this.props.handleControlClick}
-                                background={TouchableNativeFeedback.Ripple(rippleColor, false)}>
+                                background={Platform.Version >= 21 ? TouchableNativeFeedback.Ripple(rippleColor, false)
+                                                                    : TouchableNativeFeedback.SelectableBackground()}>
         <View style={[Styles.containerStyle, Styles.buttonStyles, customStyle]}>
           <Text style={[Styles.text, Styles.buttonTextStyles]}>
             {this.props.value}

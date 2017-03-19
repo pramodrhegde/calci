@@ -154,7 +154,9 @@ export default class CalculatorApp extends Component {
                   break;
         case 'del': if(currentEquation.search(operationRegex) !== currentEquation.length - 1) {
                       currentEquation = currentEquation.substring(0, currentEquation.length - 1);
-                      operationData.currentString = operationData.currentString.substring(0, operationData.currentString.length - 1);
+                      if(typeof operationData.currentString === 'string') {
+                        operationData.currentString = operationData.currentString.substring(0, operationData.currentString.length - 1);
+                      }
 
                       if(operationData.currentString === '' || operationData.currentString === '-') {
                         operationData.currentString = '0';
