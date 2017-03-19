@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.prazor9.calci"
-    android:versionCode="3000001"
-    android:versionName="3.0.1">
+    android:versionCode="3000002"
+    android:versionName="3.0.2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -28,6 +28,9 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ae8b0829ab12607c77076d302d4fce709656a6aa" />
     </application>
 
 </manifest>
